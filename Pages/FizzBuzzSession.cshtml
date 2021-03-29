@@ -1,0 +1,23 @@
+﻿@page
+@model FizzBuzzWeb.Pages.FizzBuzzSessionModel
+@{
+}
+
+<b><p>Dane w zapisane w sesji</p></b>
+@if (Model.FZ != null)
+{
+    <p>
+        @Html.DisplayNameFor(model => Model.FZ.dt):
+        @Model.FZ.dt
+    </p>
+    <p>
+        @Html.DisplayNameFor(model => Model.FZ.Number):
+        @Model.FZ.Number
+    </p>
+    <p>
+        @Html.DisplayNameFor(model => Model.FZ.Result):
+        @Model.FZ.Result
+    </p>
+
+
+}
