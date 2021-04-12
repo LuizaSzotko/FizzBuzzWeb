@@ -8,20 +8,24 @@ using System.Threading.Tasks;
 using FizzBuzzWeb.Models;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using FizzBuzzWeb.Data;
 
 namespace FizzBuzzWeb.Pages
 {
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
+        private readonly FizzBuzzContext _context;
+
         [BindProperty]
         public FizzBuzz FZ { get; set; }
         [BindProperty(SupportsGet = true)]
         public string Name { get; set; }
-        
-        public IndexModel(ILogger<IndexModel> logger)
+
+        public IndexModel(ILogger<IndexModel> logger, FizzBuzzContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public void OnGet()
@@ -31,7 +35,8 @@ namespace FizzBuzzWeb.Pages
                 Name = "User";
             }
         }
-        public IActionResult OnPost()
+
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
@@ -41,6 +46,8 @@ namespace FizzBuzzWeb.Pages
             FZ.dt = DateTime.UtcNow.ToLocalTime();
             FZ.dt.ToString("dd-MM-yyyy hh:mm:ss");
             HttpContext.Session.SetString("SessionFizzBuzz", JsonConvert.SerializeObject(FZ));
+            _context.FizzBuzz.Add(FZ);
+            await _context.SaveChangesAsync();
             return RedirectToPage("./FizzBuzzSession");
         }
 
