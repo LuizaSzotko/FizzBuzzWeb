@@ -25,7 +25,8 @@ namespace FizzBuzzWeb.Pages
         public void OnGet()
         {
             FizzBuzzes = _context.FizzBuzz
-                .OrderByDescending(fz => fz.dt).ToList();
+                .OrderByDescending(fz => fz.dt)
+                .Take(10).ToList();
         }
     }
 }
