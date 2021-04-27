@@ -1,0 +1,41 @@
+﻿@page
+@model FizzBuzzWeb.Pages.FizzBuzzListModel
+@{
+
+}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => Model.FizzBuzzes[0].dt)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => Model.FizzBuzzes[0].Number)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => Model.FizzBuzzes[0].Result)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model.FizzBuzzes)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.dt)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Number)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Result)
+                        </td>
+                        <td>
+                            <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>

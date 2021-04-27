@@ -9,6 +9,7 @@ namespace FizzBuzzWeb.Models
 {
     public class FizzBuzz
     {
+        public int Id { get; set; }
         [Display(Name = "Liczba")]
         [Range(1, 1000, ErrorMessage = "Wartość musi być z przedziału 1 - 1000"), Required(ErrorMessage = "Pole jest obowiązkowe!")]
         public int Number { get; set; }
